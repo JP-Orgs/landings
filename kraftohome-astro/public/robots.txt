@@ -1,5 +1,4 @@
-# TODO: reemplazar REEMPLAZAR-DOMINIO por el dominio real antes de publicar
 User-agent: *
 Allow: /
 
-Sitemap: https://REEMPLAZAR-DOMINIO/sitemap-index.xml
+Sitemap: https://jp-orgs.github.io/landings/sitemap-index.xml

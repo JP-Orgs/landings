@@ -1,9 +1,13 @@
+// prefija rutas de assets con el base path del sitio (necesario en GitHub Pages: /landings)
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const asset = (path: string) => `${base}${path}`;
+
 export const business = {
   name: "KraftoHome",
   waNumber: "5491132340725",
   accent: "#c2661f",
-  // TODO: reemplazar por el dominio real antes de publicar
-  domain: "https://REEMPLAZAR-DOMINIO",
+  // Si consiguen dominio propio: cambiar a ese dominio (y sacar `base` de astro.config.mjs)
+  domain: "https://jp-orgs.github.io/landings",
   locality: "Hurlingham",
   region: "Buenos Aires",
   instagram: "https://www.instagram.com/kraftohome",
@@ -31,19 +35,19 @@ export type WorkItem = {
 
 export const work: WorkItem[] = [
   {
-    photo: "/images/closet-finished.jpg",
+    photo: asset("/images/closet-finished.jpg"),
     alt: "Vestidor de melamina fabricado a medida",
   },
   {
-    photo: "/images/tv-unit-finished.jpg",
+    photo: asset("/images/tv-unit-finished.jpg"),
     alt: "Placar con mueble de TV fabricado a medida",
   },
   {
-    photo: "/images/kitchen-finished.jpg",
+    photo: asset("/images/kitchen-finished.jpg"),
     alt: "Cocina de melamina fabricada a medida",
   },
   {
-    photo: "/images/entryway-finished.jpg",
+    photo: asset("/images/entryway-finished.jpg"),
     alt: "Recibidor con estante flotante fabricado a medida",
   },
 ];
@@ -56,18 +60,18 @@ export type BeforeAfterItem = {
 
 export const beforeAfter: BeforeAfterItem[] = [
   {
-    before: "/images/closet-before.jpg",
-    after: "/images/closet-finished.jpg",
+    before: asset("/images/closet-before.jpg"),
+    after: asset("/images/closet-finished.jpg"),
     alt: "Vestidor de melamina a medida",
   },
   {
-    before: "/images/wardrobe-before.jpg",
-    after: "/images/wardrobe-after.jpg",
+    before: asset("/images/wardrobe-before.jpg"),
+    after: asset("/images/wardrobe-after.jpg"),
     alt: "Placar con estantes y cajones a medida",
   },
   {
-    before: "/images/tv-unit-before.jpg",
-    after: "/images/tv-unit-finished.jpg",
+    before: asset("/images/tv-unit-before.jpg"),
+    after: asset("/images/tv-unit-finished.jpg"),
     alt: "Mueble de TV con biblioteca a medida",
   },
 ];

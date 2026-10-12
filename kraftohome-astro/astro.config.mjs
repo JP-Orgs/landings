@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: reemplazar por el dominio real antes de publicar (requerido para sitemap/canonical)
-  site: 'https://REEMPLAZAR-DOMINIO',
+  // Si consiguen dominio propio: cambiar site a ese dominio y quitar base.
+  site: 'https://jp-orgs.github.io',
+  base: '/landings',
   integrations: [sitemap()]
 });
