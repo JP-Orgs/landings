@@ -47,8 +47,8 @@ export const work: WorkItem[] = [
     alt: "Cocina de melamina fabricada a medida",
   },
   {
-    photo: asset("/images/entryway-finished.jpg"),
-    alt: "Recibidor con estante flotante fabricado a medida",
+    photo: asset("/images/wardrobe-after.jpg"),
+    alt: "Placar fabricado a medida",
   },
 ];
 
