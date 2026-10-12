@@ -1,0 +1,63 @@
+---
+import { features } from "../data/content";
+---
+
+<div id="about" class="section-wrap section-pad">
+  <div
+    style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;"
+    class="hero-grid"
+  >
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <h2 style="font-size: 34px; letter-spacing: -0.01em; color: oklch(15% 0.01 80);">
+        Quiénes somos
+      </h2>
+      <p style="font-size: 16px; line-height: 1.7; color: oklch(38% 0.01 80);">
+        Somos fabricantes de muebles a medida de Buenos Aires, Hurlingham. Nos destacamos
+        por la calidad de los materiales y por tener el detalle que nuestros clientes
+        buscan. Diseñamos y fabricamos muebles a medida y también amoblamos espacios.
+      </p>
+    </div>
+    <div
+      class="grid-4"
+      style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; align-content: start;"
+    >
+      {
+        features.map((feature) => (
+          <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+            <div
+              style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: oklch(58% 0.14 50);"
+            >
+              {feature.icon === "manufacturing" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 7l3 3-7 7-3-3z" />
+                  <path d="M17 4l3 3-2 2-3-3z" />
+                  <path d="M4 20l4-4" />
+                </svg>
+              )}
+              {feature.icon === "customFit" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 17L17 3l4 4L7 21z" />
+                  <path d="M14 6l2 2M10 10l2 2M6 14l2 2" />
+                </svg>
+              )}
+              {feature.icon === "delivery" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="13" height="9" rx="1" />
+                  <path d="M15 10h4l3 3v3h-7z" />
+                  <circle cx="7" cy="18" r="1.5" />
+                  <circle cx="17" cy="18" r="1.5" />
+                </svg>
+              )}
+              {feature.icon === "hardware" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.3 2.3-2-2z" />
+                </svg>
+              )}
+            </div>
+            <span style="font-weight: 600; font-size: 15px">{feature.title}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

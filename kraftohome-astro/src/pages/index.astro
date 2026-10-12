@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import WorkCarousel from "../components/WorkCarousel.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import Faq from "../components/Faq.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { faqs } from "../data/content";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title="KraftoHome — Muebles a medida en Hurlingham, Buenos Aires"
+  description="Fabricamos muebles a medida en Hurlingham, Buenos Aires: vestidores, placares, cocinas y mobiliario con fabricación propia e instalación a domicilio. Pedí tu presupuesto por WhatsApp."
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
+
+  <div class="section-wrap">
+    <Nav />
+  </div>
+  <Hero />
+  <About />
+  <WorkCarousel />
+  <BeforeAfter />
+  <Faq />
+  <Contact />
+  <Footer />
+</Layout>
+
+<script>
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLButtonElement>("[data-scroll]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const track = document.getElementById(button.dataset.scroll!);
+      const amount = Number(button.dataset.amount ?? "0");
+      const dir = Number(button.dataset.dir ?? "1");
+      track?.scrollBy({
+        left: dir * amount,
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+      });
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = document.getElementById(button.dataset.goto!);
+      target?.scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        inline: "start",
+        block: "nearest",
+      });
+    });
+  });
+</script>

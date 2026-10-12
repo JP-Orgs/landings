@@ -1,0 +1,126 @@
+---
+import { beforeAfter } from "../data/content";
+---
+
+<div id="before-after" class="section-wrap section-pad">
+  <div
+    style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; margin: 0 auto 48px;"
+  >
+    <h2 style="font-size: 34px; letter-spacing: -0.01em; color: oklch(15% 0.01 80);">
+      Antes y después: mirá la transformación
+    </h2>
+    <p style="font-size: 16px; color: oklch(38% 0.01 80); line-height: 1.6; max-width: 640px;">
+      Ambientes vacíos convertidos en muebles a medida, fabricados e instalados por
+      nosotros.
+    </p>
+  </div>
+  <div class="carousel-wrapper" style="position: relative; max-width: 640px; margin: 0 auto">
+    <div
+      id="before-after-track"
+      class="carousel-track"
+      style="display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 24px; padding-bottom: 8px;"
+    >
+      {
+        beforeAfter.map((item, i) => (
+          <div
+            id={`before-after-item-${i}`}
+            class="card ba-item"
+            data-before={item.before}
+            data-after={item.after}
+            style="flex: 0 0 100%; max-width: 640px; margin: 0 auto; scroll-snap-align: start; position: relative; aspect-ratio: 4/3; overflow: hidden;"
+          >
+            <img
+              class="ba-image"
+              src={item.before}
+              alt={item.alt}
+              width="640"
+              height="480"
+              loading="lazy"
+              style="width: 100%; height: 100%; object-fit: cover; display: block;"
+            />
+            <div
+              style="position: absolute; bottom: 12px; left: 12px; right: 12px; display: flex; background: oklch(99% 0.004 80 / 0.92); border-radius: 999px; padding: 4px; box-shadow: 0 4px 12px oklch(0% 0 0 / 0.15);"
+            >
+              <button
+                class="ba-toggle"
+                data-view="before"
+                aria-pressed="true"
+                style="flex: 1; border: none; border-radius: 999px; padding: 10px 0; font-weight: 600; font-size: 14px; cursor: pointer;"
+              >
+                Antes
+              </button>
+              <button
+                class="ba-toggle"
+                data-view="after"
+                aria-pressed="false"
+                style="flex: 1; border: none; border-radius: 999px; padding: 10px 0; font-weight: 600; font-size: 14px; cursor: pointer;"
+              >
+                Después
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <button
+      data-scroll="before-after-track" data-amount="900"
+      data-dir="-1"
+      aria-label="Anterior"
+      class="carousel-arrow"
+      style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid oklch(91% 0.008 80); background: oklch(99% 0.004 80); box-shadow: 0 4px 12px oklch(0% 0 0 / 0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: oklch(20% 0.01 80);"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+    </button>
+    <button
+      data-scroll="before-after-track" data-amount="900"
+      data-dir="1"
+      aria-label="Siguiente"
+      class="carousel-arrow"
+      style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid oklch(91% 0.008 80); background: oklch(99% 0.004 80); box-shadow: 0 4px 12px oklch(0% 0 0 / 0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: oklch(20% 0.01 80);"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6"></path>
+      </svg>
+    </button>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 8px; margin-top: 20px;">
+    {
+      beforeAfter.map((_, i) => (
+        <button
+          data-goto={`before-after-item-${i}`}
+          aria-label={`Ir al par ${i + 1}`}
+          class="carousel-dot"
+          style="width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; cursor: pointer; background: oklch(80% 0.01 80);"
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .ba-toggle[aria-pressed="true"] {
+    background: var(--ba-active-bg, #c2661f);
+    color: var(--ba-active-color, #fff8f2);
+  }
+  .ba-toggle[aria-pressed="false"] {
+    background: transparent;
+    color: #3a3330;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".ba-item").forEach((item) => {
+    const img = item.querySelector<HTMLImageElement>(".ba-image");
+    const toggles = item.querySelectorAll<HTMLButtonElement>(".ba-toggle");
+    toggles.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const view = btn.dataset.view;
+        if (!img) return;
+        img.src = view === "before" ? item.dataset.before! : item.dataset.after!;
+        toggles.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === view)));
+      });
+    });
+  });
+</script>
